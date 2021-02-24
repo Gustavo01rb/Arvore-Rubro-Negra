@@ -130,9 +130,7 @@ void Caso2(Tree **t){
 
 <h4>Caso 3</h4>
 <p>O novo nó N inserido possui o pai P e o Tio T pintados de vermelho, condição que fere a propriedade 2. Nesse caso pinta-se o pai e o tio e N para preto e seu avô para veremelho. Porém, o avô pode estar violando agora a Propriedade 2 ou 4. Para consertar isso, uma "chamada recursiva" do procedimento de Caso1 é iniciada passando o avô como parâmetro</p>
-
 <img src="Imagens/Caso3.fw.png" title="Exemplo de árvore"/>
-
 
  ~~~C
  void Caso3(Tree **t){
@@ -148,3 +146,42 @@ void Caso2(Tree **t){
          Caso4(t);
  }
 ~~~
+
+<h4>Caso 4</h4>
+<p>O pai P é vermelho mas o tio U é preto; além disso, o novo nó N é o filho a esquerda de P, e P o filho a direita do seu pai V. Neste caso, uma rotação a direita que troca os papéis do novo nó N e de seu pai P deve ser realizada. Quando isso acontecer o antigo nó-pai P precisa ser tratado usando o Caso 5 (renomeando N e P) isso porque a Propriedade 4 ainda está sendo violada. Além disso, a rotação faz com que alguns caminhos passem pelo novo nó de forma diferente ao que acontecia antes, mas como os dois nós desta sub-árvore são vermelhos a Propriedade 5 não é violada (pela rotação).</p>
+<img src="Imagens/Caso4.fw.png" title="Exemplo de árvore"/>
+
+~~~~C
+void Caso4(Tree **t){
+    Tree *no = (*t);
+    Tree *vo = avo(no);
+
+    if( (no->pai->esq == no) && (vo->dir == no->pai) ){ RSD(&no->pai); no = no->dir;} 
+    if( (no->pai->dir == no) && (vo->esq == no->pai) ){ RSE(&no->pai); no = no->esq;}
+
+    Caso5(&no);
+}
+~~~~
+
+<h4>Caso 5</h4>
+<p>O pai P é vermelho mas o tio U é preto, o novo nó N é o filho direito de seu pai P, e P é o filho direito de seu pai, G. Neste caso, uma rotação a esquerda no pai de P é realizada. O resultado é uma árvore onde o antigo pai P é agora pai tanto do novo nó N quanto do avô de N, G. É sabido que G é preto, já que seu antigo filho P não poderia ser vermelho. Então as cores de P e G são trocadas, e a árvore resultante satisfaz a propriedade 4 (ambos os filhos de cada nó vermelho são pretos). A propriedade 5 (Todos os caminhos de um determinado nó até suas folhas contém o mesmo número de nós pretos) também se mantém satisfeita, já que todos os caminhos até as folhas passam pelo nó G antes, e agora todos passam pelo P. Em cada caso, este é o único nó preto da sub-árvore.</p>
+<img src="Imagens/Caso4.fw.png" title="Exemplo de árvore"/>
+
+~~~~C
+void Caso5(Tree **t){
+    Tree *no = (*t);
+    Tree *vo = avo(no);
+    Tree *pai = no->pai;
+
+    if(vo == NULL ) return;
+
+    
+    if(vo->pai != NULL){ 
+        vo->cor = false;
+        pai->cor = true;
+    }
+
+    if( (no->pai->dir == no) && (vo->dir == no->pai)) RSE(&no->pai);
+    else RSD(&no->pai);
+
+~~~~
