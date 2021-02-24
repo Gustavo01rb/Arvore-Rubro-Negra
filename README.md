@@ -130,7 +130,9 @@ void Caso2(Tree **t){
 
 <h4>Caso 3</h4>
 <p>O novo nó N inserido possui o pai P e o Tio T pintados de vermelho, condição que fere a propriedade 2. Nesse caso pinta-se o pai e o tio e N para preto e seu avô para veremelho. Porém, o avô pode estar violando agora a Propriedade 2 ou 4. Para consertar isso, uma "chamada recursiva" do procedimento de Caso1 é iniciada passando o avô como parâmetro</p>
- <p>INSERIR IMAGEM CASO 3</p>
+
+<img src="Imagens/Caso3.fw.png" title="Exemplo de árvore"/>
+
 
  ~~~C
  void Caso3(Tree **t){
