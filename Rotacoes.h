@@ -25,6 +25,7 @@ void RSD(Tree **t){
             sub->pai = no;
             sub->dado = aux->dado;
             sub->esq = no->dir;
+            sub->dir = aux->dir;
             no->dir = sub;
             free(aux);
         }else{
@@ -65,6 +66,7 @@ void RSE(Tree **t){
             sub->cor = aux->cor;
             sub->dado = aux->dado;
             sub->dir = no->esq;
+            sub->esq = aux->esq;
             no->esq = sub;
             free(aux);
         }else{

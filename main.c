@@ -86,13 +86,30 @@ int main(){
                 printf("\n\n\n\n");
                 draw_arvore_hor(raiz,false);
             break;
+
+            case 6:
+                printf("\n\t Metodos de exibicao:");
+                printf("\n\n\t  Central: ");
+                Central(&(*raiz));
+                printf("\n\t  Pre-Ordem: ");
+                PreOrdem(&(*raiz));
+                printf("\n\t  Pos-Ordem: ");
+                PosOrdem(&(*raiz));
+
+            break;
+
+            case 7:
+                printf("\n\tInforme o elemento que deseja procurar: ");
+                scanf("%d",&temp.key);
+                Pesquisa(&raiz, temp);
+            break;
         }
     }    
 }
 
 int menu(){
     int x;
-    printf("\n\n\n╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮");
+    printf("\n\n\n╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮");
     printf("\n\n\t\t  Menu de opcoes ");
     printf("\n\n\t Insercoes:");
     printf("\n\t   [1]-> Inserir um elemento.");
@@ -101,8 +118,10 @@ int menu(){
     printf("\n\n\t Exibicao:");
     printf("\n\t   [4]-> Exibir arvore desenhada com numeros.");
     printf("\n\t   [5]-> Exibir arvore desenhada com cores.");
+    printf("\n\t   [6]-> Exibir metodos: Central, Pre-ordem e Pos-Ordem.");
+    printf("\n\t   [7]-> Procurar e exibir um elemento em especifico");
 
-    printf("\n╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯ ");
+    printf("\n╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯ ");
     
     printf("\n\n\tInforme sua escolha: ");
     scanf("%d",&x);

@@ -4,27 +4,26 @@
 #include "Arvore.h"
 
 /*Funções*/
-void PreOrdem(Tree **t);
+void PreOrdem(Tree *t);
 void Central(Tree *t);
 void PosOrdem(Tree *t);
-void InfoElemento(Tree *t);
 void desenha_arvore_horiz(Tree *t, int depth, char *path, int direita, bool x);
 void draw_arvore_hor(Tree *arvore, bool x);
 /*Fim Funções*/
 
 #include "Exibe.h"
 
-void PreOrdem(Tree **t){
-    if(!(*t == NULL)){
-        printf("[%d] ", (*t)->dado.key);
-        PreOrdem(&(*t)->esq); 
-        PreOrdem(&(*t)->dir); 
+void PreOrdem(Tree *t){
+    if(!(t == NULL)){
+        printf("[%d] ", t->dado.key);
+        PreOrdem(t->esq); 
+        PreOrdem(t->dir); 
     }
 }
 void Central(Tree *t){
     if(!(t == NULL)){
         Central(t->esq); 
-        InfoElemento(t);
+        printf("[%d] ", t->dado.key);
         Central(t->dir); 
     }
 }
@@ -35,22 +34,7 @@ void PosOrdem(Tree *t){
         PosOrdem(t->dir); 
     }
 }
-void InfoElemento(Tree *t){
-    if(t == NULL)
-        printf("Saporra nao existe nao o jumento ");
-    printf("\n╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮");
-    printf("\n\n\t  Endereco do elemento: %p", t);
-    printf("\n\t  Conteúdo (Key) do elemento : %d", t->dado.key);
-    printf("\n\t  Cor do elemento: ");
-    if( t->cor == true)
-        printf("Preto");
-    else
-        printf("Vermelho");
-    printf("\n\n\t  Elemento Direito: %p", t->dir);
-    printf("\n\t  Elemento Esquerdo : %p",t->esq);
-    printf("\n\t  Elemento pai: %p", t->pai);
-    printf("\n╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯ ");
-}
+
 
 
 void desenha_arvore_horiz(Tree *t, int depth, char *path, int direita, bool x){

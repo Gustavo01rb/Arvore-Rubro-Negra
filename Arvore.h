@@ -24,6 +24,8 @@ struct Tree{
 Tree* avo(Tree *t);
 Tree* tio(Tree *t);
 Tree* CreateTree();
+void Pesquisa(Tree **t, capsule c);
+void InfoElemento(Tree *t);
 /*Fim FUnções*/
 
 Tree* CreateTree(){
@@ -48,5 +50,39 @@ Tree* tio(Tree *t){
         return aux->dir;
 }
 /*Fim Parentes do nó*/
+
+void Pesquisa(Tree **t, capsule c){
+    if( *t == NULL){
+        printf("\n\nERRO: Dado inexistente ou nao gravado\n");
+        return;
+    }
+
+    if((*t)->dado.key > c.key){ Pesquisa(&(*t)->esq, c); return; }
+    if((*t)->dado.key < c.key){ Pesquisa(&(*t)->dir, c); return; }
+    
+    InfoElemento( (*t) );
+}
+void InfoElemento(Tree *t){
+    printf("\n\n\t\tElemento encontrado:");
+    printf("\n\t╭━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╮");
+    printf("\n\n\t\t  Endereco do elemento: %p", t);
+    printf("\n\t\t  Conteúdo (Key) do elemento : %d", t->dado.key);
+    printf("\n\t\t  Cor do elemento: ");
+    if( t->cor == true)
+        printf("Preto");
+    else
+        printf("Vermelho");
+
+    printf("\n\n\t\t  Filho Direito: %p", t->dir);
+    if(t->dir != NULL)
+        printf("\tConteudo: %d",t->dir->dado.key);
+    printf("\n\t\t  Filho Esquerdo : %p",t->esq);
+    if(t->esq != NULL)
+        printf("\tConteudo: %d",t->esq->dado.key);
+    printf("\n\t\t  Elemento pai: %p", t->pai);
+    if(t->pai != NULL)
+        printf("\tConteudo: %d",t->pai->dado.key);
+    printf("\n\t╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯\n\n ");
+}
 
 #endif
