@@ -23,6 +23,7 @@ struct Tree{
 /*Funções*/
 Tree* avo(Tree *t);
 Tree* tio(Tree *t);
+Tree* irmao(Tree *t);
 Tree* CreateTree();
 void Pesquisa(Tree **t, capsule c);
 void InfoElemento(Tree *t);
@@ -49,6 +50,11 @@ Tree* tio(Tree *t){
     else
         return aux->dir;
 }
+Tree* irmao(Tree *t){
+    if(t->pai->dir == t) return t->pai->esq;
+    else return t->pai->dir;
+}
+
 /*Fim Parentes do nó*/
 
 void Pesquisa(Tree **t, capsule c){

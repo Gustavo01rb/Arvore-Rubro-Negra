@@ -2,6 +2,7 @@
 #include "Exibe.h"
 #include "Insere.h"
 #include "Rotacoes.h"
+#include "Remove.h"
 
 
 int menu();
@@ -102,6 +103,13 @@ int main(){
                 printf("\n\tInforme o elemento que deseja procurar: ");
                 scanf("%d",&temp.key);
                 Pesquisa(&raiz, temp);
+            break;
+            
+            case 8:
+                printf("\n\tInforme o elemento que deseja procurar: ");
+                scanf("%d",&temp.key);
+                RemoveTree(&raiz,temp);
+                
             break;
         }
     }    
