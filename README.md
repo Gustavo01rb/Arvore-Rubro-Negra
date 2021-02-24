@@ -31,5 +31,15 @@
             <td> O(log n) </td>
         </tr>
     </tbody>
-
 </table>
+<h2>Estrutura de dado </h2>
+
+'''C
+struct Tree{
+    capsule dado;
+    bool cor; // false = vermelho; true = preto
+    Tree *esq;
+    Tree *dir;
+    Tree *pai;
+};
+'''
