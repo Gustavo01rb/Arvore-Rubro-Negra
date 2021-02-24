@@ -32,14 +32,43 @@
         </tr>
     </tbody>
 </table>
+
+
 <h2>Estrutura de dado </h2>
 
-'''C
+<p>A estrutura usada para cada nó de uma árvore rubro-negra é extremamente semelhante a de uma árvore binária simples, a pricipal diferença se dá no acrécimo de uma variável do tipo bolleana para indicar a cor que um determinado nó representa. Nesse caso foi adotado 'false' para a cor vermelha e 'true' para a cor preta.</p>
+<p>Dessa forma a estrutura de um nó possui os seguintes atributos: </p>
+<ul>
+  <li>Chave</li>
+  <li>Cor</li>
+  <li>Filho Esquerdo</li>
+  <li>Filho Direito</li>
+  <li>Pai</li>
+</ul>
+<p>Caso não exista um pai ou um filho de um nó o atributo do ponteiro correspondente apontará para NULL. Nesse código considera-se que esses valores 'NULL' possuem a cor negra e também são tratados como se fossem ponteiros para as folhas da árvore</p>
+
+~~~C
 struct Tree{
-    capsule dado;
+    capsule key;
     bool cor; // false = vermelho; true = preto
     Tree *esq;
     Tree *dir;
     Tree *pai;
 };
-'''
+~~~
+
+
+<h2>Propriedades</h2>
+
+<p> Uma árvore Rubro-Negra é uma árvore de busca binária que satisfaz as seguintes propriedades Rubro-Negra:<p>
+<ol>
+  <li>Um nó é vermelho ou é preto</li>
+  <li>A raiz é preta</li>
+  <li>Toda folha (NULL) é preta</li>
+  <li> Se um nó é vermelho então ambos os seus filhos são
+pretos</li>
+  <li>Para cada nó p, todos os caminhos desde p até as
+folhas contêm o mesmo número de nós pretos</li>
+</ol>
+<p>Essas regras asseguram uma propriedade crítica das árvores rubro-negras: que o caminho mais longo da raiz a qualquer folha não seja mais do que duas vezes o caminho mais curto da raiz a qualquer outra folha naquela árvore. O resultado é que a árvore é aproximadamente balanceada. </p>
+![Alt text](teste.png "teste")
