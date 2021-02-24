@@ -165,7 +165,7 @@ void Caso4(Tree **t){
 
 <h4>Caso 5</h4>
 <p>O pai P é vermelho mas o tio U é preto, o novo nó N é o filho direito de seu pai P, e P é o filho direito de seu pai, G. Neste caso, uma rotação a esquerda no pai de P é realizada. O resultado é uma árvore onde o antigo pai P é agora pai tanto do novo nó N quanto do avô de N, G. É sabido que G é preto, já que seu antigo filho P não poderia ser vermelho. Então as cores de P e G são trocadas, e a árvore resultante satisfaz a propriedade 4 (ambos os filhos de cada nó vermelho são pretos). A propriedade 5 (Todos os caminhos de um determinado nó até suas folhas contém o mesmo número de nós pretos) também se mantém satisfeita, já que todos os caminhos até as folhas passam pelo nó G antes, e agora todos passam pelo P. Em cada caso, este é o único nó preto da sub-árvore.</p>
-<img src="Imagens/Caso4.fw.png" title="Exemplo de árvore"/>
+<img src="Imagens/Caso5.fw.png" title="Exemplo de árvore"/>
 
 ~~~~C
 void Caso5(Tree **t){
