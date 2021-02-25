@@ -20,7 +20,7 @@ int main(){
 
     raiz = CreateTree();
     
-    while(escolha != 10){
+    while(escolha != 9){
         escolha = menu();
         switch(escolha){
             
@@ -106,11 +106,16 @@ int main(){
             break;
             
             case 8:
-                printf("\n\tInforme o elemento que deseja procurar: ");
+                printf("\n\tInforme o elemento que deseja Remover: ");
                 scanf("%d",&temp.key);
                 RemoveTree(&raiz,temp);
-                
             break;
+            case 9:
+                printf("\n\tAte mais!!\n\n\n ");
+            break;
+            default:
+                printf("\n\nOpcao invalida.");
+
         }
     }    
 }
@@ -128,7 +133,9 @@ int menu(){
     printf("\n\t   [5]-> Exibir arvore desenhada com cores.");
     printf("\n\t   [6]-> Exibir metodos: Central, Pre-ordem e Pos-Ordem.");
     printf("\n\t   [7]-> Procurar e exibir um elemento em especifico");
-
+    printf("\n\n\t Remocao:");
+    printf("\n\t   [8]-> Remover um elemento");
+    printf("\n\n\t   [9]-> Sair");
     printf("\n╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯ ");
     
     printf("\n\n\tInforme sua escolha: ");

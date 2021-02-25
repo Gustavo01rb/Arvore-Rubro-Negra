@@ -33,6 +33,16 @@
     </tbody>
 </table>
 
+<h2>Execução do código</h2>
+<p>Códigos compilados e executados em: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 </p>
+<p>Há duas versões para testes:</p>
+<ol>
+  <li>gcc Main.c -o Main.c</li>
+  <li>gcc Testes.c -o Main.c</li>
+</ol>
+<p>A primeira opção é um teste pré-definido já a segunda é um teste livre para o usuário. Na exibição, a ávore aparecerá deitada, considere cima como direita e baixo com esquerda.</p>
+<img src="Imagens/Terminal.png" align="center"/>
+
 
 <h2>Estrutura de dado </h2>
 
@@ -75,6 +85,139 @@ folhas contêm o mesmo número de nós pretos</li>
 <p align="center">
   <img src="Imagens/teste.png" title="Exemplo de árvore"/>
 </p>
+
+<h2>Rotações</h2>
+<p>A árvore Rubro-Negro é um sistema muito delicado, que pode ser facilmente desbalanceado
+a partir de operações de inserção e remoção por exemplo. Para corrigir isso é utilizado um esuqema de rotações.
+</p>
+<p>Existem 4 Tipos de rotação e são elas:</p>
+<h4>Rotação simples a direita</h4>
+<ul>
+  <li>Seja X o pai de T</li>
+  <li>Torne o filho à direita de T o filho à esquerda de X.</li>
+  <li>Torne X o filho à direita de T</li>
+</ul>
+coloca imagem aqui
+
+<p>Código utilizado:</p>
+
+~~~C
+void RSD(Tree **t){
+    Tree *no = (*t);
+    Tree *aux = no->pai;
+    Tree *vo = avo(no);
+    if(no->pai->esq == no){
+        if( avo(no) != NULL){
+            Tree *sub = (Tree *)malloc(sizeof(Tree));
+            vo->esq = no;
+            no->pai = vo;
+            sub->pai = no;
+            sub->dado = aux->dado;
+            sub->esq = no->dir;
+            sub->dir = aux->dir;
+            no->dir = sub;
+            free(aux);
+        }else{
+            /*Swap*/
+                capsule temp;
+                temp = aux->dado;
+                aux->dado = no->dado;
+                no->dado = temp;
+            /*Fim Swap*/
+            aux->esq = no->esq;
+            aux->esq->pai = aux;
+            no->esq = no->dir;
+            no->dir = aux->dir;
+            if(no->dir != NULL)
+                no->dir->pai = no;
+            aux->dir = no;
+        }
+    }else if(no->pai->dir == no){
+        aux = no->esq;
+        no->pai->dir = aux;
+        aux->pai = no->pai;
+        no->esq = aux->dir;
+        aux->dir = no;
+        no->pai = aux;
+    }
+}
+~~~
+
+<h4>Rotação simples a esqueda</h4>
+<ul>
+  <li>Seja X o pai de T</li>
+  <li>Torne o filho à esquerda de T o filho à esquerda de X.</li>
+  <li>Torne X o filho à esquerda de T</li>
+</ul>
+
+<p>Código Utilizado: </p>
+
+~~~C
+void RSE(Tree **t){
+    Tree *no = (*t);
+    Tree *aux = no->pai;
+    Tree *vo = avo(no);
+    if(no->pai->dir == no){
+        if( vo != NULL){
+            Tree *sub = (Tree *)malloc(sizeof(Tree));
+            vo->dir = no;
+            no->pai = vo;
+            sub->pai = no;
+            sub->cor = aux->cor;
+            sub->dado = aux->dado;
+            sub->dir = no->esq;
+            sub->esq = aux->esq;
+            no->esq = sub;
+            free(aux);
+        }else{
+            /*Swap*/
+                capsule temp;
+                temp = aux->dado;
+                aux->dado = no->dado;
+                no->dado = temp;
+            /*Fim Swap*/
+            aux->dir = no->dir;
+            aux->dir->pai = aux;
+            no->dir = no->esq;
+            no->esq = aux->esq;
+            if(no->esq != NULL)
+                no->esq->pai = no;
+            aux->esq = no;
+        }
+    }else if(no->pai->esq == no){
+        aux = no->dir;
+        no->pai->esq = aux;
+        aux->pai = no->pai;
+        no->dir = aux->esq;
+        aux->esq = no;
+        no->pai = aux;
+    }
+
+}
+~~~
+
+
+<h4>Rotação Dupla a direita</h4>
+<p>Pode ser obtida a partir de uma rotação simples a esquerda seguida de uma rotação simples a direita</p>
+<p>Código utilizado: </p>
+
+~~~C
+void RDD(Tree **t){
+    RSE(t);
+    RSD(&(*t)->esq);
+}
+~~~
+
+<h4>Rotação Dupla a esquerda</h4>
+<p>Pode ser obtida a partir de uma rotação simples a direita seguida de uma rotação simples a esquerda</p>
+<p>Código utilizado: </p>
+
+~~~C
+void RDE(Tree **t){
+    RSD(t);
+    RSE(&(*t)->dir);
+}
+~~~
 
 <h2>Inserções</h2>
 <p>Para garantir o balanceamento de uma árvore Rubro-Negra a cada inserção é realizada uma série de verificações com intuito de garantir que suas propriedades sejam sempre verdadeiras. Caso haja algum caso em que as propriedades não são satisfeitas será necessário realizar uma série de rotações e tratamento de cores. Sempre que um elemento é inserido em uma árvore sua cor será vermelha, caso o nó seja raiz sua cor será imediatamente trocada por preta para satisfazer a propriedade 2. Caso o nó inserido não seja o nó raiz deve-se verificar a propriedade 4.</p>
@@ -284,3 +427,14 @@ Similar à situação 3. Siga os seguintes passos:
 </ul>
 </p>
 <img src="Imagens/Sit4.png" align="center" title="Exemplo de árvore"/>
+<h1>Referências</h1>
+
+  <ul>
+    <li><a href="https://pt.wikipedia.org/wiki/%C3%81rvore_AVL">https://pt.wikipedia.org/wiki/%C3%81rvore_AVL</a></li>
+    <li><a href="http://docente.ifrn.edu.br/robinsonalves/disciplinas/estruturas-de-dados/ArvRN.pdf">http://docente.ifrn.edu.br/robinsonalves/disciplinas/estruturas-de-dados/ArvRN.pdf</a></li>
+    <li><a href="https://www.ic.unicamp.br/~francesquini/mc202/files/aula16-18.pdf">https://www.ic.unicamp.br/~francesquini/mc202/files/aula16-18.pdf</a></li>
+    <li><a href="http://www.facom.ufu.br/~albertini/1sem2013/alg/aulas/aula20-apres.pdf">http://www.facom.ufu.br/~albertini/1sem2013/alg/aulas/aula20-apres.pdf</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/%C3%81rvore_rubro-negra">https://pt.wikipedia.org/wiki/%C3%81rvore_rubro-negra</a></li>
+    <li><a href="http://www.ppgia.pucpr.br/~alceu/mestrado/aula1/estruturadados_arvores_parte2.PDF">http://www.ppgia.pucpr.br/~alceu/mestrado/aula1/estruturadados_arvores_parte2.PDF</a></li>
+    <li><a href="http://algoritmoconcreta.blogspot.com/2014/05/arvore-rubro-negra.html">http://algoritmoconcreta.blogspot.com/2014/05/arvore-rubro-negra.html</a></li>
+  </ul>
