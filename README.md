@@ -1,5 +1,5 @@
 <h1 align="center">Árvore Rubro-Negra</h1>
-<h2 border="none"> Intordução </h2>
+<h2 border="none"> Introdução </h2>
 <p>Árvores do tipo rubro-negra ou vermelho-preto são árvores binárias de busca balanceadas, que, de maneira simplificada, é uma árvore de busca binária que insere e remove de forma inteligente, para assegurar que a árvore permaneça aproximadamente balanceada.</p>
 <p>Essa estrutura foi inventada no ano de 1972 por Rudolf Bayer, um professor emérito de informática na Universidade Técnica de Munique, que nomeou a estrutura de “Árvores binárias B simétricas” e posteriormente foi renomeada em um artigo publicado em 1978 escrito por Leonidas J. Guibas e Robert Sedgewick.</p>
 <h3 border="none" align="center"> Complexidade de Tempo em Notação big O </h3>
@@ -156,7 +156,7 @@ void Caso4(Tree **t){
     Tree *no = (*t);
     Tree *vo = avo(no);
 
-    if( (no->pai->esq == no) && (vo->dir == no->pai) ){ RSD(&no->pai); no = no->dir;} 
+    if( (no->pai->esq == no) && (vo->dir == no->pai) ){ RSD(&no->pai); no = no->dir;}
     if( (no->pai->dir == no) && (vo->esq == no->pai) ){ RSE(&no->pai); no = no->esq;}
 
     Caso5(&no);
@@ -175,8 +175,8 @@ void Caso5(Tree **t){
 
     if(vo == NULL ) return;
 
-    
-    if(vo->pai != NULL){ 
+
+    if(vo->pai != NULL){
         vo->cor = false;
         pai->cor = true;
     }
@@ -185,3 +185,102 @@ void Caso5(Tree **t){
     else RSD(&no->pai);
 
 ~~~~
+
+<h2>Remoções</h2>
+
+<p>A remoção nas árvores rubro-negras se inicia com uma etapa de busca e remoção como nas árvores binárias de busca convencionais. Então se alguma propriedade vermelho-preta for violada, a árvore deve ser rebalanceada. Dessa forma podemos organizar tudo em um passo a passo:</p>
+<ul>
+  <li>Encontre o nó v a ser removido</li>
+  <li>Remova o nó v da mesma forma que em uma árvore binária de pesquisa</li>
+  <li>Ajuste os critérios da árvore rubro-negra</li>
+</ul>
+<p>No decorrer das remoções podem ocorrer 4 tipos de situações: </p>
+
+<table align="center">
+    <thead>
+        <th> Situação </th>
+        <th> V </th>
+        <th> Sucessor </th>
+    </thead>
+    <tbody>
+        <tr>
+            <td> 1 </td>
+            <td> Vermelho </td>
+            <td> Vermelho </td>
+        </tr>
+        <tr>
+            <td> 2 </td>
+            <td> Preto </td>
+            <td> Vermelho </td>
+        </tr>
+        <tr>
+            <td> 3 </td>
+            <td> Preto </td>
+            <td> Preto </td>
+        </tr>
+        <tr>
+            <td> 4 </td>
+            <td> Vermelho </td>
+            <td> Preto </td>
+        </tr>
+    </tbody>
+</table>
+
+<p>obs:Considere como sucessor o nó mais a esquerda da sub-árvore direira do nó a ser removido</p>
+
+<h3>Situação 1</h3>
+<p>seja v o nó a ser removido. Sendo v rubro e x, sucessor de v, também rubro, nada precisará ser feito, pois a árvore Rubro-Negra
+continua atendendo a todos os critérios</p>
+<img src="Imagens/Situacao1.png" align="center" title="Exemplo de árvore"/>
+<h3>Situação 2</h3>
+<p>v é preto e x é vermelho. Pinte x de negro e pare.</p>
+<img src="Imagens/Situacao2.png" align="center" title="Exemplo de árvore"/>
+<h3>Situação 3</h3>
+<p>v é negro e x é negro.</p>
+<h4>Caso 1:</h4>
+<p>se x é preto e x tem irmão w vermelho e pai negro.Siga os seguintes passos:</p>
+<ul>
+  <li>Rotação simples esquerda</li>
+  <li>Mude a cor de w para preto</li>
+  <li>Mude a cor do pai de x para vermelho</li>
+</ul>
+  <img src="Imagens/Sit3c1.png" align="center" title="Exemplo de árvore"/>
+<h4>Caso 2:</h4>
+<p>Se x é preto, tem irmão w preto com filhos preto e pai preto. Mude a cor o irmão w para vermelho</p>
+<img src="Imagens/sit3c2.png" align="center" title="Exemplo de árvore"/>
+<h4>Caso 3:</h4>
+<p>se x é preto, tem irmão w preto com filhos pretos e pai vermelho. Pinte o irmão w de vermelho e o pai de x de preto</p>
+<img src="Imagens/Sit3c3.png" align="center" title="Exemplo de árvore"/>
+<h4>Caso 4</h4>
+<p>Se x é preto, tem irmão w preto, tem
+pai de qualquer cor, tem
+irmão w com filho esquerdo vermelho e irmão w
+com filho direito preto. Siga os passos:
+<ul>
+  <li>Rotação simples direita em w</li>
+  <li>Trocar as cores de w com seu filho esquerdo</li>
+</ul>
+</p>
+<img src="Imagens/Sit3c4.png" align="center" title="Exemplo de árvore"/>
+<h4>Caso 5</h4>
+<p>Se x é preto, tem irmão w preto, tem
+pai de qualquer cor, tem
+irmão w com filho esquerdo qualquer cor e
+irmão w com filho direito vermelho. Siga os passos:
+<ul>
+  <li>Rotação simples a esquerda</li>
+  <li>Mude a cor do pai para preto</li>
+  <li>w igual a cor anterior do pai de x</li>
+  <li>Mude a cor do filho direito de w para preto</li>
+</ul></p>
+<img src="Imagens/Sit3c5.png" align="center" title="Exemplo de árvore"/>
+
+<h3>Situação 4</h3>
+<p>v é vermelho e x é preto.
+Similar à situação 3. Siga os seguintes passos:
+<ul>
+  <li>Pinte x de vermelho</li>
+  <li>Proceda como na situação 3</li>
+</ul>
+</p>
+<img src="Imagens/Sit4.png" align="center" title="Exemplo de árvore"/>
