@@ -97,7 +97,8 @@ a partir de operações de inserção e remoção por exemplo. Para corrigir iss
   <li>Torne o filho à direita de T o filho à esquerda de X.</li>
   <li>Torne X o filho à direita de T</li>
 </ul>
-coloca imagem aqui
+
+<img src="Imagens/RSD.fw.png" title="Rotação Simples a Direita">
 
 <p>Código utilizado:</p>
 
@@ -150,6 +151,9 @@ void RSD(Tree **t){
   <li>Torne X o filho à esquerda de T</li>
 </ul>
 
+<img src="Imagens/RSE.fw.png" title="Rotação Simples a Esquerda">
+
+
 <p>Código Utilizado: </p>
 
 ~~~C
@@ -201,6 +205,9 @@ void RSE(Tree **t){
 <p>Pode ser obtida a partir de uma rotação simples a esquerda seguida de uma rotação simples a direita</p>
 <p>Código utilizado: </p>
 
+<img src="Imagens/RDD.fw.png" title="Rotação Dupla a Direita">
+
+
 ~~~C
 void RDD(Tree **t){
     RSE(t);
@@ -211,6 +218,9 @@ void RDD(Tree **t){
 <h4>Rotação Dupla a esquerda</h4>
 <p>Pode ser obtida a partir de uma rotação simples a direita seguida de uma rotação simples a esquerda</p>
 <p>Código utilizado: </p>
+
+<img src="Imagens/RDE.fw.png" title="Rotação Dupla a Esquerda">
+
 
 ~~~C
 void RDE(Tree **t){
@@ -273,7 +283,7 @@ void Caso2(Tree **t){
 
 <h4>Caso 3</h4>
 <p>O novo nó N inserido possui o pai P e o Tio T pintados de vermelho, condição que fere a propriedade 2. Nesse caso pinta-se o pai e o tio e N para preto e seu avô para veremelho. Porém, o avô pode estar violando agora a Propriedade 2 ou 4. Para consertar isso, uma "chamada recursiva" do procedimento de Caso1 é iniciada passando o avô como parâmetro</p>
-<img src="Imagens/Caso3.fw.png" title="Exemplo de árvore"/>
+<img src="Imagens/Caso3.fw.png" title="Caso 3"/>
 
  ~~~C
  void Caso3(Tree **t){
@@ -292,7 +302,7 @@ void Caso2(Tree **t){
 
 <h4>Caso 4</h4>
 <p>O pai P é vermelho mas o tio U é preto; além disso, o novo nó N é o filho a esquerda de P, e P o filho a direita do seu pai V. Neste caso, uma rotação a direita que troca os papéis do novo nó N e de seu pai P deve ser realizada. Quando isso acontecer o antigo nó-pai P precisa ser tratado usando o Caso 5 (renomeando N e P) isso porque a Propriedade 4 ainda está sendo violada. Além disso, a rotação faz com que alguns caminhos passem pelo novo nó de forma diferente ao que acontecia antes, mas como os dois nós desta sub-árvore são vermelhos a Propriedade 5 não é violada (pela rotação).</p>
-<img src="Imagens/Caso4.fw.png" title="Exemplo de árvore"/>
+<img src="Imagens/Caso4.fw.png" title="Caso 4"/>
 
 ~~~~C
 void Caso4(Tree **t){
@@ -308,7 +318,7 @@ void Caso4(Tree **t){
 
 <h4>Caso 5</h4>
 <p>O pai P é vermelho mas o tio U é preto, o novo nó N é o filho direito de seu pai P, e P é o filho direito de seu pai, G. Neste caso, uma rotação a esquerda no pai de P é realizada. O resultado é uma árvore onde o antigo pai P é agora pai tanto do novo nó N quanto do avô de N, G. É sabido que G é preto, já que seu antigo filho P não poderia ser vermelho. Então as cores de P e G são trocadas, e a árvore resultante satisfaz a propriedade 4 (ambos os filhos de cada nó vermelho são pretos). A propriedade 5 (Todos os caminhos de um determinado nó até suas folhas contém o mesmo número de nós pretos) também se mantém satisfeita, já que todos os caminhos até as folhas passam pelo nó G antes, e agora todos passam pelo P. Em cada caso, este é o único nó preto da sub-árvore.</p>
-<img src="Imagens/Caso5.fw.png" title="Exemplo de árvore"/>
+<img src="Imagens/Caso5.fw.png" title="Caso 5"/>
 
 ~~~~C
 void Caso5(Tree **t){
@@ -374,10 +384,10 @@ void Caso5(Tree **t){
 <h3>Situação 1</h3>
 <p>seja v o nó a ser removido. Sendo v rubro e x, sucessor de v, também rubro, nada precisará ser feito, pois a árvore Rubro-Negra
 continua atendendo a todos os critérios</p>
-<img src="Imagens/Situacao1.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Situacao1.png" />
 <h3>Situação 2</h3>
 <p>v é preto e x é vermelho. Pinte x de negro e pare.</p>
-<img src="Imagens/Situacao2.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Situacao2.png" />
 <h3>Situação 3</h3>
 <p>v é negro e x é negro.</p>
 <h4>Caso 1:</h4>
@@ -387,13 +397,13 @@ continua atendendo a todos os critérios</p>
   <li>Mude a cor de w para preto</li>
   <li>Mude a cor do pai de x para vermelho</li>
 </ul>
-  <img src="Imagens/Sit3c1.png" align="center" title="Exemplo de árvore"/>
+  <img src="Imagens/Sit3c1.png" />
 <h4>Caso 2:</h4>
 <p>Se x é preto, tem irmão w preto com filhos preto e pai preto. Mude a cor o irmão w para vermelho</p>
-<img src="Imagens/sit3c2.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/sit3c2.png" />
 <h4>Caso 3:</h4>
 <p>se x é preto, tem irmão w preto com filhos pretos e pai vermelho. Pinte o irmão w de vermelho e o pai de x de preto</p>
-<img src="Imagens/Sit3c3.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Sit3c3.png" />
 <h4>Caso 4</h4>
 <p>Se x é preto, tem irmão w preto, tem
 pai de qualquer cor, tem
@@ -404,7 +414,7 @@ com filho direito preto. Siga os passos:
   <li>Trocar as cores de w com seu filho esquerdo</li>
 </ul>
 </p>
-<img src="Imagens/Sit3c4.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Sit3c4.png" />
 <h4>Caso 5</h4>
 <p>Se x é preto, tem irmão w preto, tem
 pai de qualquer cor, tem
@@ -416,7 +426,7 @@ irmão w com filho direito vermelho. Siga os passos:
   <li>w igual a cor anterior do pai de x</li>
   <li>Mude a cor do filho direito de w para preto</li>
 </ul></p>
-<img src="Imagens/Sit3c5.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Sit3c5.png" />
 
 <h3>Situação 4</h3>
 <p>v é vermelho e x é preto.
@@ -426,7 +436,7 @@ Similar à situação 3. Siga os seguintes passos:
   <li>Proceda como na situação 3</li>
 </ul>
 </p>
-<img src="Imagens/Sit4.png" align="center" title="Exemplo de árvore"/>
+<img src="Imagens/Sit4.png" />
 <h1>Referências</h1>
 
   <ul>
